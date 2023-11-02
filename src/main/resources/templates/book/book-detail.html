@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Book List</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <h1>Book Detail</h1>
+                <span th:text="${book.bookName}"></span>
+                <span th:text="${book.author}"></span>
+                <span th:text="${book.description}"></span>
+                <img class="img-fluid rounded-3 mb-3" th:src="${book.photoURL}"/>
+                <a class="btn btn-outline-secondary" th:href="@{/books/{bookId}/delete(bookId=${book.id})}">Delete</a>
+                <a class="btn btn-primary" th:href="@{/books/{bookId}/edit(bookId=${book.id})}">Edit</a>
+    </section>
+
+
+
+</main>
+</body>
+</html>

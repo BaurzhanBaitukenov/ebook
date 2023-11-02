@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Book Edit</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form method="post" role="form" th:action="@{/books/{bookId}/edit(bookId=${book.id})}" th:object="${book}">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="title">Book Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="bookName"
+                                name="title"
+                                th:field="*{bookName}"
+                                placeholder="Book Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="title">Author</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="author"
+                                name="author"
+                                th:field="*{author}"
+                                placeholder="Author">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="photoUrl">Price</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="price"
+                                name="price"
+                                th:field="*{price}"
+                                placeholder="price">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="photoUrl">PhotoURL</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="photoURL"
+                                name="photoUrl"
+                                th:field="*{photoURL}"
+                                placeholder="Photo URL">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="photoUrl">Demo Version</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="demoVersion"
+                                name="demoVersion"
+                                th:field="*{demoVersion}"
+                                placeholder="demoVersion Url">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="content">Description</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            name="content"
+                            th:field="*{description}"
+                            placeholder="Content">
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </section>
+
+
+</main>
+</body>
+</html>

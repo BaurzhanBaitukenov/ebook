@@ -12,4 +12,5 @@ public interface BookService {
     void deleteBook(long bookId);
     Book getBookEntityById(long bookId);
     void editBookEntity(Book book);
+    List<BookDto> searchBooks(String query);
 }

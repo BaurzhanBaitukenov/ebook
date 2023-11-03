@@ -1,29 +1,68 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
       layout:decorate="~{layout}">
 <head>
     <title>Book List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin: 0;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.25rem;
+            width: 300px;
+            height: 300px;
+        }
+        .img-thumbnail {
+            width: 50%;
+            height: 50%;
+            margin: auto;
+            display: block;
+        }
+        .card:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+        .search-form {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
-
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
-        <h1>Book List</h1>
-        <ul>
-            <li th:each="book : ${books}">
-                <span th:text="${book.bookName}"></span>
-                <span th:text="${book.author}"></span>
-                <span th:text="${book.description}"></span>
-                <img class="img-fluid rounded-3 mb-3" th:src="${book.photoURL}"/>
-                <a class="btn btn-primary" th:href="@{/books/{booksId}(booksId=${book.id})}" th:text="View">View</a>
-            </li>
-        </ul>
+        <div class="search-container">
+            <form class="form-inline search-form" th:action="@{/books/search}">
+                <input name="query" class="form-control mr-sm-2 w-100" type="search" placeholder="Search books" aria-label="Search">
+            </form>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4">
+            <div th:each="book : ${books}" class="col mb-4">
+                <div class="card text-center h-100">
+                    <img class="img-thumbnail" th:src="${book.photoURL}" alt="Book Image">
+                    <div class="card-body">
+                        <h5 th:text="${book.bookName}" class="card-title"></h5>
+                        <p th:text="'By ' + ${book.author}" class="card-text"></p>
+                        <p th:text="'Price: $' + ${book.price}" class="card-text font-weight-bold"></p>
+                        <a class="btn btn-warning w-100" th:href="@{/books/{booksId}(booksId=${book.id})}">View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-
-
 </main>
 </body>
 </html>

@@ -1,27 +1,54 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://thymeleaf.org"
       layout:decorate="~{layout}">
 <head>
-    <title>Book List</title>
+    <title>Book Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .info {
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
-
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
-        <h1>Book Detail</h1>
-                <span th:text="${book.bookName}"></span>
-                <span th:text="${book.author}"></span>
-                <span th:text="${book.description}"></span>
-                <img class="img-fluid rounded-3 mb-3" th:src="${book.photoURL}"/>
-                <a class="btn btn-outline-secondary" th:href="@{/books/{bookId}/delete(bookId=${book.id})}">Delete</a>
-                <a class="btn btn-primary" th:href="@{/books/{bookId}/edit(bookId=${book.id})}">Edit</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info">
+                        <h1>Book Description</h1>
+                        <p th:text="${book.description}"></p>
+                    </div>
+                </div>
+                <div class="col-md-6 center-content">
+                    <img class="img-fluid rounded-3 mb-3" th:src="${book.photoURL}"/>
+                    <div>
+                        <p>Author: <span th:text="${book.author}"></span></p>
+                        <p>Book Name: <span th:text="${book.bookName}"></span></p>
+                        <p>Price: <span th:text="${book.price}"></span></p>
+                        <div class="mt-3">
+                            <a class="btn btn-success mb-3" th:href="@{/books/{bookId}/addToCart(bookId=${book.id})}">Add to Cart</a>
+                            <br>
+                            <a class="btn btn-primary" th:href="@{/books/{bookId}/edit(bookId=${book.id})}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{/books/{bookId}/delete(bookId=${book.id})}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-
-
-
 </main>
 </body>
 </html>

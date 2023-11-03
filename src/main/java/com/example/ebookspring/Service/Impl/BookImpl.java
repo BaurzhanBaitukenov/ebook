@@ -63,6 +63,14 @@ public class BookImpl implements BookService {
     }
 
 
+    // Search book using SQL query
+    @Override
+    public List<BookDto> searchBooks(String query) {
+        List<Book> clubs = bookRepository.searchBooks(query);
+        return clubs.stream().map(this::mapToBookDto).collect(Collectors.toList());
+    }
+
+
     //    Mapper
     private Book mapToBook(BookDto bookDto) {
         return Book.builder()

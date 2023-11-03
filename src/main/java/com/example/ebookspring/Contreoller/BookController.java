@@ -75,6 +75,12 @@ public class BookController {
     }
 
 
-
+    //searching
+    @GetMapping("/search")
+    public String searchBook(@RequestParam(value = "query") String query, Model model) {
+        List<BookDto> books = bookService.searchBooks(query);
+        model.addAttribute("books", books);
+        return "book/books-list";
+    }
 
 }

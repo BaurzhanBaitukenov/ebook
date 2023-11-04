@@ -28,19 +28,20 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/books}">Find Books</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
-<!--                 <li class="nav-item"><a class="nav-link" th:href="@{'/profile/' + ${#authentication.principal.username}}" th:text="${#authentication.principal.username}">Email</a></li> -->
+                <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{'/profile/' + ${#authentication.principal.username}}" th:text="${#authentication.principal.username}">Email</a></li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                        <li><a class="dropdown-item" th:href="@{/books/create}">Create Book</a></li>
-                        <li><a class="dropdown-item" th:href="@{/users}">List of Users</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/books/create}">Create Book</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/users}">List of Users</a></li>
                         <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
-                <img class="rounded-circle"/>
-<!--                 <img class="rounded-circle" th:src="${user.photoURL}"/> -->
+<!--                 <img sec:authorize="!isAuthenticated()" class="rounded-circle"/> -->
+<!--                  <img class="rounded-circle" th:src="${user.photourl}"/> -->
             </ul>
         </div>
     </div>

@@ -25,7 +25,6 @@
                 <thead>
                 <tr>
                     <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th scope="col">Photo</th>
@@ -34,11 +33,10 @@
                 </thead>
                 <tbody>
                 <tr th:each="user : ${users}">
-                    <td th:text="${user.userName}"></td>
-                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.username}"></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.password}"></td>
-                    <td><img class="rounded-circle" th:src="${user.photoURL}"/></td>
+                    <td><img class="rounded-circle" th:src="${user.photourl}"/></td>
                     <td><a class="btn btn-primary" th:href="@{/users/{userId}/delete(userId=${user.id})}" th:text="Delete">Delete</a></td>
                 </tr>
                 </tbody>

@@ -23,17 +23,36 @@ CREATE TABLE IF NOT EXISTS books (
     );
 
 
--- Users Table
-CREATE SEQUENCE books_id_seq;
+-- for user id seq
+CREATE SEQUENCE users_id_seq;
 
-CREATE TABLE IF NOT EXISTS users (
-    id BIGINT PRIMARY KEY DEFAULT nextval('users_id_seq'),
-    user_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    photoURL VARCHAR(10000),
-    password VARCHAR(1000)
-    );
+-- for roles id seq
+CREATE SEQUENCE roles_id_seq;
+
+-- create table for roles
+CREATE TABLE roles (
+    id BIGINT DEFAULT nextval('roles_id_seq') PRIMARY KEY,
+    name TEXT
+);
+
+-- create table users
+CREATE TABLE users (
+    id BIGINT DEFAULT nextval('users_id_seq') PRIMARY KEY,
+    username TEXT,
+    email TEXT,
+    photoURL TEXT,
+    password TEXT
+);
+
+-- create relationship between user and role
+CREATE TABLE user_roles (
+    user_id BIGINT,
+    role_id BIGINT,
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
+);
+
 
 
 

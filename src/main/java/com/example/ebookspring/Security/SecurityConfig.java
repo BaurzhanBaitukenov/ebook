@@ -31,9 +31,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/","/login/**","/books", "/books/search", "/register/**", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/books/{id}").hasAnyAuthority("USER", "ADMIN")
-                .requestMatchers(new AntPathRequestMatcher("/books/{id}/delete")).hasAnyAuthority("ADMIN")
-                .requestMatchers(new AntPathRequestMatcher("/books/{id}/edit")).hasAnyAuthority("ADMIN")
-                .requestMatchers(new AntPathRequestMatcher("/users/**")).hasAnyAuthority("ADMIN")
+                .requestMatchers("/profile/{email}").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/books/{id}/delete").hasAnyAuthority("ADMIN")
+                .requestMatchers("/books/{id}/edit").hasAnyAuthority("ADMIN")
+                .requestMatchers("/users/**").hasAnyAuthority("ADMIN")
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -47,6 +48,7 @@ public class SecurityConfig {
                 );
         return http.build();
     }
+
 
     public void configure(AuthenticationManagerBuilder builder) throws Exception{
         builder.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());

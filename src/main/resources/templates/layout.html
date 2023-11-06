@@ -30,6 +30,7 @@
                 <li class="nav-item"><a class="nav-link" th:href="@{/books}">Find Books</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{'/profile/' + ${#authentication.principal.username}}" th:text="${#authentication.principal.username}">Email</a></li>
 
                 <li class="nav-item dropdown">
@@ -40,8 +41,10 @@
                         <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
-<!--                 <img sec:authorize="!isAuthenticated()" class="rounded-circle"/> -->
-<!--                  <img class="rounded-circle" th:src="${user.photourl}"/> -->
+<!--                 <div th:if="${#authorization.expression('isAuthenticated()')}"> -->
+<!--                     <img th:if="${user.photourl != null}" class="rounded-circle" th:src="${user.photourl}"/> -->
+<!--                     <img th:unless="${user.photourl != null}" class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShg8keaWuTWemET3-1mWqZae05N8W6SLGgGg&usqp=CAU"/> -->
+<!--                 </div> -->
             </ul>
         </div>
     </div>

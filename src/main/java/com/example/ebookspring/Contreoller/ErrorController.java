@@ -1,0 +1,19 @@
+package com.example.ebookspring.Contreoller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
+
+    @RequestMapping("/error")
+    public String handleError() {
+        // Provide your custom error page path here
+        return "error/page";
+    }
+
+    public String getErrorPath() {
+        return "/error";
+    }
+}

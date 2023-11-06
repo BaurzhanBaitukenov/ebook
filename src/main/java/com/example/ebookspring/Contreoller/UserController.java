@@ -13,7 +13,6 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -30,9 +29,16 @@ public class UserController {
 
 
     // delete user
-    @GetMapping("/{userId}/delete")
+    @GetMapping("/users/{userId}/delete")
     public String deleteUserById(@PathVariable("userId") long userId) {
         userService.deleteUser(userId);
         return "redirect:/users";
+    }
+
+    @GetMapping("/profile/{email}")
+    public String getUserPage(@PathVariable("email") String email, Model model) {
+        UserEntity user = userService.findByEmail(email);
+        model.addAttribute("user", user);
+        return "user/user-profile";
     }
 }

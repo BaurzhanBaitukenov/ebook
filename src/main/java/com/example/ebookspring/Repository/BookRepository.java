@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("SELECT c from Book c WHERE c.bookName LIKE CONCAT('%', :query, '%')")
+    @Query("SELECT c FROM Book c WHERE LOWER(c.bookName) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Book> searchBooks(String query);
 }
